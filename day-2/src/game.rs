@@ -2,7 +2,8 @@ use crate::cube;
 use std::str::FromStr;
 
 #[derive(Debug)]
-
+/// A game represented as game ID and string of cube rolls.
+/// Can be improved to store Vec<CubeThrow> instead of plain string.
 pub struct Game {
     pub id: usize,
     pub cube_throws: String,
@@ -49,5 +50,36 @@ impl Game {
         }
 
         true
+    }
+
+    pub fn find_minimum_cubes_power(&self) -> usize {
+        let mut min_red: usize = 0;
+        let mut min_blue: usize = 0;
+        let mut min_green: usize = 0;
+
+        for cube_throw in self.cube_throws.split([',', ';']) {
+            let cube_throw =
+                cube::CubeThrow::from_str(cube_throw).expect("Cube throw is not valid.");
+
+            match cube_throw {
+                cube::CubeThrow::Red(number) => {
+                    if min_red < number {
+                        min_red = number;
+                    };
+                }
+                cube::CubeThrow::Blue(number) => {
+                    if min_blue < number {
+                        min_blue = number;
+                    };
+                }
+                cube::CubeThrow::Green(number) => {
+                    if min_green < number {
+                        min_green = number;
+                    };
+                }
+            }
+        }
+
+        min_red * min_blue * min_green
     }
 }

@@ -1,5 +1,6 @@
 use std::str::FromStr;
 
+/// CubeThrow represent one roll of a dice within a game, with cube colour and rolled number
 pub enum CubeThrow {
     Blue(usize),
     Red(usize),
