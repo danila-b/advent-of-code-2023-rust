@@ -53,9 +53,7 @@ impl Game {
     }
 
     pub fn find_minimum_cubes_power(&self) -> usize {
-        let mut min_red: usize = 0;
-        let mut min_blue: usize = 0;
-        let mut min_green: usize = 0;
+        let (mut min_red, mut min_blue, mut min_green) = (0, 0, 0);
 
         for cube_throw in self.cube_throws.split([',', ';']) {
             let cube_throw =
